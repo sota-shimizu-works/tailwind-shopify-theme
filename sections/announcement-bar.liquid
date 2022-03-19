@@ -1,0 +1,105 @@
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'announcement' -%}
+
+      {%- if block.settings.text != blank -%}
+      <div class="tw-bg-indigo-600" x-data="{ close: false }" x-bind:class="{'tw-hidden' : close }">
+        <div class="tw-max-w-7xl tw-mx-auto tw-py-3 tw-px-3 lg:tw-px-8">
+          <div class="tw-flex tw-items-center tw-justify-between tw-flex-wrap">
+            <div class="tw-w-0 tw-flex-1 tw-flex tw-items-center">
+              <span class="tw-flex tw-p-2 tw-rounded-lg tw-bg-indigo-800">
+                <!-- Heroicon name: outline/speakerphone -->
+                <svg class="tw-h-6 tw-w-6 tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                </svg>
+              </span>
+              <p class="tw-ml-3 tw-font-medium tw-text-white tw-truncate">
+                <span>{{ block.settings.text | escape }}</span>
+              </p>
+            </div>
+
+            {%- if block.settings.link != blank -%}
+            <div class="tw-order-3 tw-mt-2 tw-flex-shrink-0 tw-w-full sm:tw-order-2 sm:tw-mt-0 sm:tw-w-auto">
+              <a href="{{ block.settings.link }}" class="tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2 tw-border tw-border-transparent tw-rounded-md tw-shadow-sm tw-text-sm tw-font-medium tw-text-indigo-600 tw-bg-white hover:tw-bg-indigo-50 tw-no-underline"> Learn more </a>
+            </div>
+            {%- endif -%}
+
+            <div class="tw-order-2 tw-flex-shrink-0 sm:tw-order-3 sm:tw-ml-3">
+              <button type="button" class="tw--mr-1 tw-flex tw-p-2 tw-rounded-md hover:tw-bg-indigo-500 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-white sm:tw--mr-2 tw-bg-transparent tw-border-transparent tw-cursor-pointer" x-on:click="close=!close">
+                <span class="tw-sr-only">Dismiss</span>
+                <!-- Heroicon name: outline/x -->
+                <svg class="tw-h-6 tw-w-6 tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+
+  {%- endcase -%}
+{%- endfor -%}
+
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Welcome to our store",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "options": [
+            {
+              "value": "background-1",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__1.label"
+            },
+            {
+              "value": "background-2",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__2.label"
+            },
+            {
+              "value": "inverse",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__3.label"
+            },
+            {
+              "value": "accent-1",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__4.label"
+            },
+            {
+              "value": "accent-2",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__5.label"
+            }
+          ],
+          "default": "accent-1",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      }
+    ]
+  }
+}
+{% endschema %}
