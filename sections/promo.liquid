@@ -1,0 +1,102 @@
+{% assign images = "" %}
+{% for product in section.settings.promo-collection.products limit:7 %}
+{% assign image = product | image_url: width: 600 %}
+{% assign images = images | append: "," | append: image %}
+{% endfor %}
+{% assign images = images | remove_first: "," %}
+{% assign images = images | split: "," %}
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="tw-relative tw-bg-white tw-overflow-hidden tw-py-16">
+  <div class="tw-pt-16 tw-pb-80 sm:tw-pt-24 sm:tw-pb-40 lg:tw-pt-40 lg:tw-pb-48">
+    <div class="tw-relative tw-max-w-7xl tw-mx-auto tw-px-4 sm:tw-px-6 lg:tw-px-8 sm:tw-static">
+      <div class="sm:tw-max-w-lg">
+        <h1 class="tw-text-4xl tw-font tw-font-extrabold tw-tracking-tight tw-text-gray-900 sm:tw-text-6xl">{{ section.settings.promo-title }}</h1>
+        <p class="tw-mt-4 tw-text-xl tw-text-gray-500">{{ section.settings.promo-description }}</p>
+      </div>
+      <div>
+        <div class="tw-mt-10">
+          <!-- Decorative image grid -->
+          <div aria-hidden="true" class="tw-pointer-events-none lg:tw-absolute lg:tw-inset-y-0 lg:tw-max-w-7xl lg:tw-mx-auto lg:tw-w-full">
+            <div class="tw-absolute tw-transform sm:tw-left-1/2 sm:tw-top-0 sm:tw-translate-x-8 lg:tw-left-1/2 lg:tw--translate-y-1/2">
+              <div class="tw-flex tw-items-center tw-space-x-6 lg:tw-space-x-8">
+                <div class="tw-flex-shrink-0 tw-grid tw-grid-cols-1 tw-gap-y-6 lg:tw-gap-y-8">
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden sm:tw-opacity-0 lg:tw-opacity-100">
+                    <img src="{{ images[0] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[1] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                </div>
+                <div class="tw-flex-shrink-0 tw-grid tw-grid-cols-1 tw-gap-y-6 lg:tw-gap-y-8">
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[2] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[3] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[4] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                </div>
+                <div class="tw-flex-shrink-0 tw-grid tw-grid-cols-1 tw-gap-y-6 lg:tw-gap-y-8">
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[5] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                  <div class="tw-w-44 tw-h-64 tw-rounded-lg tw-overflow-hidden">
+                    <img src="{{ images[6] }}" alt="" class="tw-w-full tw-h-full tw-object-center tw-object-cover">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="{{ section.settings.promo-collection.url }}" class="tw-inline-block tw-text-center tw-bg-indigo-600 tw-border tw-border-transparent tw-rounded-md tw-py-3 tw-px-8 tw-font-medium tw-text-white hover:tw-bg-indigo-700 tw-no-underline">{{ section.settings.promo-btn-text }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": {
+    "ja": "promo-section"
+  },
+  "presets": [
+    {
+      "name": {
+        "ja": "promo-section"
+      },
+      "category": {
+        "ja": "promo-section"
+      }
+    }
+  ],
+  "settings": [
+      {
+          "id": "promo-title",
+          "type": "text",
+          "label": "title",
+          "default": "Summer styles are finally here"
+      },
+      {
+          "id": "promo-description",
+          "type": "text",
+          "label": "description",
+          "default": "This year, our new summer collection will shelter you from the harsh elements of a world that doesn't care if you live or die."
+      },
+      {
+          "id": "promo-collection",
+          "type": "collection",
+          "label": "collection"
+      },
+      {
+          "id": "promo-btn-text",
+          "type": "text",
+          "label": "btn-text",
+          "default": "Shop Collection"
+      }
+  ]
+}
+{% endschema %}

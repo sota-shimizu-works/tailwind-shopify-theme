@@ -1,0 +1,79 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="tw-bg-white tw-py-16">
+  <div class="tw-max-w-7xl tw-mx-auto tw-px-4 sm:tw-px-6 lg:tw-px-8">
+    <div class="lg:tw-text-center">
+      <h2 class="tw-text-base tw-text-indigo-600 tw-font-semibold tw-tracking-wide tw-uppercase">{{ section.settings.feature-label }}</h2>
+      <p class="tw-mt-2 tw-text-3xl tw-leading-8 tw-font-extrabold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl">{{ section.settings.feature-heading }}</p>
+      <p class="tw-mt-4 tw-max-w-2xl tw-text-xl tw-text-gray-500 lg:tw-mx-auto">{{ section.settings.feature-description }}</p>
+    </div>
+
+    <div class="tw-mt-10">
+      <dl class="tw-space-y-10 md:tw-space-y-0 md:tw-grid md:tw-grid-cols-2 md:tw-gap-x-8 md:tw-gap-y-10">
+      {% for block in section.blocks%}
+        <div class="tw-relative">
+          <dt>
+            <p class="tw-ml-16 tw-text-lg tw-leading-6 tw-font-medium tw-text-gray-900">{{ block.settings.title }}</p>
+          </dt>
+          <dd class="tw-mt-2 tw-ml-16 tw-text-base tw-text-gray-500">{{ block.settings.description }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": {
+    "ja": "feature-section"
+  },
+  "presets": [
+    {
+      "name": {
+        "ja": "feature-section"
+      },
+      "category": {
+        "ja": "feature-section"
+      }
+    }
+  ],
+  "settings": [
+      {
+          "id": "feature-label",
+          "type": "text",
+          "label": "label",
+          "default": "TRANSACTIONS"
+      },
+      {
+          "id": "feature-heading",
+          "type": "text",
+          "label": "heading",
+          "default": "A better way to send money"
+      },
+      {
+          "id": "feature-description",
+          "type": "text",
+          "label": "description",
+          "default": "Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam."
+      }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "items",
+      "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "label": "title"
+        },
+        {
+          "id": "description",
+          "type": "text",
+          "label": "description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
